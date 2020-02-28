@@ -1,0 +1,13 @@
+			---Modèle relationnel Gamepedia---
+
+Jeu(--jeunom, descc,descl,dateSortie,dateAtt)
+Plateforme(--nomPlat,alias,descc,descl,tarifini,nbbase,#nomComp)
+Compagnie(--nomComp,alia,abrev,descc,descl,adresse,datecrea,tel,urlweb)
+Classification(--nomCl,descc,descl)
+Personnages(--nomPers,alias,nomreel,nomfamille,datenaiss,genre,descc,descl,premierJeu)
+Classement(--#jeuNom,public,--#nomCl)
+JeuGenre(--#jeuNom,genre)
+JeuThème(--#jeuNom,theme)
+Prelation(#np1,#np2,relation)
+JeuSurPlat(--#jeuNom,--#nomPlat)
+aDeveloppé(--#jeuNom,--#nomComp)
