@@ -51,7 +51,20 @@ class q1
     }
 
     public function JeuPagine(){
-        
+        $jeu = Game::where('id','<=','4000')->get();
+        $i = 0 ;
+        $npage = 1 ;
+        foreach($jeu as $j){
+          if($i == 500){
+              echo '<br>/////////////////////////<br>//////////' . $npage . '///////////// <br>////////////////////////<br><br>' ;
+              $i = 0 ;
+              $npage++ ;
+          }else{
+              echo $j->id . ' - ' . $j->name . $j->deck . "<br>" ;
+              $i++ ;
+          }
+
+        }
     }
 
 }

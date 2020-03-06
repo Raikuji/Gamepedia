@@ -11,4 +11,5 @@ $q1 = new q1();
 //$q1->donneMario();
 //$q1->installeJapon();
 //$q1->baseInstalle();
-$q1->afficheJeuOrdre();
+//$q1->afficheJeuOrdre();
+$q1->JeuPagine();
