@@ -45,8 +45,7 @@ class Categorie extends \Illuminate\Database\Eloquent\Model
 
 ```php
 
-$q1 = Annonce::where('id', '=', '22')->first();
-$q1->photos()->get();
+$q1 = Annonce::where('id', '=', '22')->first()->photos()->get();
 
 $q2 = $q1->photos()
     ->where('taille_octet', '>', 100000)
