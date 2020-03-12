@@ -8,4 +8,4 @@ use games\q2;
 $app = new games\AppConf();
 $app->addDbConf("../config/conf.ini");
 $q2 = new q2();
-$q2->jeuxSony();
+$q2->ratingMario();

@@ -14,7 +14,7 @@ class Company extends Model{
 
     public function games()
     {
-        return $this->belongsToMany('games\models\Game', 'game_developpers', 'comp_id', 'game_id');
+        return $this->belongsToMany('games\model\Game', 'game_developers', 'comp_id', 'game_id');
     }
 
 }

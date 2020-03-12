@@ -30,13 +30,21 @@ class q2
 
     public function jeuxSony()
     {
-        //echo Company::where('name', 'like', '%Sony%')->select('name')->first()->games();
-/*        $sonies = Company::where('name', 'like', '%Sony%')->get();
-        foreach ($sonies as $sony) {
-            echo $sony->select('name')->get() . "<br>";
-        }*/
+        $companies = Company::where('name', 'like', '%Sony%')->get();
+        foreach ($companies as $company) {
+            $games = $company->games()->get();
+            foreach ($games as $game) {
+                echo $game->name;
+                echo '<br>';
+            }
+        }
     }
 
-
+    public function ratingMario() {
+        $games = Game::where('name', 'like', '%Mario%')->get();
+        foreach ($games as $game) {
+            echo $game->games;
+        }
+    }
 
 }
