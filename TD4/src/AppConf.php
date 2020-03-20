@@ -2,13 +2,12 @@
 
 namespace games;
 
-use \Illuminate\Database\Capsule\Manager as DB;
+use \Illuminate\Database\Capsule\Manager ;
 
 class AppConf{
     public static function addDbConf($file){
         $conf = parse_ini_file($file);
-        $db = new DB();
-        DB::enableQueryLog();
+        $db = new Manager();
         $db->addConnection($conf);
         $db->setAsGlobal();
         $db->bootEloquent();
