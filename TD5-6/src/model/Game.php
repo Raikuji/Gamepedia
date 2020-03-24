@@ -24,4 +24,8 @@ class Game extends Model {
         return $this->belongsToMany('games\model\GameRating', 'game2rating', 'game_id', 'rating_id');
     }
 
+    public function commentaires() {
+        return $this->hasMany('games\model\Commentaire');
+    }
+
 }
