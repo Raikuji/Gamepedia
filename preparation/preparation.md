@@ -1,23 +1,33 @@
-####  Installation de Faker
+#### json_encode()
 
-```
-composer require fzaninotto/faker
-```
+Un objet d'un modèle Eloquent retourne un objet JSON.
 
-#### Donnez un exemple de code pour générer une adresse américaine en utilisant faker
+Un ensemble d'object de modèle Eloquent retourne un tableau d'objet JSON.
 
-```php
-$faker = Faker\Factory::create();
-echo $faker->address;
-```
-
-#### Formattez une date en type DateTime : "2017/02/16 (16:15)"
+#### $_GET et $_POST
 
 ```php
-$faker = Faker\Factory::create();
-echo $faker->date($format = 'Y/m/d', $max = 'now');
-echo $faker->time($format = 'H:i', $max = 'now');
+$app->get('/mon/url/:get', function($get){
+    //j'utilise le $get
+});
+
+$app->post('/mon/url/:post', function($post){
+    //j'utilise le $post
+});
+```
+#### SLIM Code retour et Header
+
++ Code retour
+
+```php
+$app = new Slim();
+$app->response->setStatus(200);
 ```
 
++ Header
+```php
+$app = new Slim();
+$app->response->headers->set('Content-Type, 'application/json);
+```
 
 
