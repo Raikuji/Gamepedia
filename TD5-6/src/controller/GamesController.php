@@ -4,6 +4,7 @@
 namespace games\controller;
 
 
+use games\model\Commentaire;
 use games\model\Game;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Slim\Slim;
@@ -19,7 +20,11 @@ class GamesController
         }
         $app->response->setStatus(200);
         $app->response->headers->set('Content-Type', 'application/json');
-        echo json_encode($r);
+        echo json_encode(['games' => $r,
+        'links' => [
+            'comment' => ['href' => $app->urlFor('comments', ['id' => $id])],
+            'characters'=> ['href' => $app->urlFor('charactersGame', ['id' => $id])]
+        ]]);
     }
 
     public function getGames() {
@@ -73,6 +78,42 @@ class GamesController
         }
 
         echo json_encode($commentaires_array);
+    }
+
+    public function getGameChars($id) {
+        $app=Slim::getInstance();
+
+        $characters = Game::where('id', '=', $id)->firstorFail()->characters()->select('id', 'name')->get();
+
+        $app->response->setStatus(200);
+        $app->response->headers->set('Content-Type', 'application/json');
+
+        $char_array = [];
+
+        foreach ($characters as $character) {
+            array_push($char_array, ['character' => $character,
+            'links' => ['self' => $app->urlFor('characters', ['id' => $character->id])
+            ]]);
+        }
+
+        echo json_encode(['characters' => $char_array]);
+    }
+
+    public function getChars($id) {
+        //
+    }
+
+    public function postComments($id, $json) {
+        $app=Slim::getInstance();
+        $data = json_decode($json);
+        $comment = new Commentaire();
+        $comment->game_id = $id;
+        $comment->titre = $data->titre;
+        $comment->contenu = $data->contenu;
+        $comment->email_utilisateur = $data->email_utilisateur;
+        $comment->save();
+        $app->response->redirect($app->urlFor('comments', ['id'=> $id]), 201);
+
     }
 
 }
