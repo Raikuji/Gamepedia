@@ -19,9 +19,14 @@ class Game extends Model {
         return $this->belongsToMany('games\models\Company', 'game_developpers', 'game_id', 'comp_id');
     }
 
-    public function games()
+    public function ratings()
     {
-        return $this->belongsToMany('games\model\GameRating', 'game2ratings', 'rating_id', 'game_id');
+        return $this->belongsToMany('games\model\GameRating', 'game2rating', 'game_id', 'rating_id');
+    }
+
+    public function publishers()
+    {
+        return $this->belongsToMany('games\model\Company', 'game_publishers', 'game_id', 'comp_id');
     }
 
 }

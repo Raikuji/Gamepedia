@@ -43,8 +43,77 @@ class q2
     public function ratingMario() {
         $games = Game::where('name', 'like', '%Mario%')->get();
         foreach ($games as $game) {
-            echo $game->games;
+            $rates = $game->ratings;
+            echo $game->name . ': ';
+            foreach ($rates as $rate) {
+                echo $rate->rating_board_id;
+                echo ' ';
+            }
+            echo '<br>';
         }
+    }
+
+    public function marioMore3Chars() {
+        $games = Game::where('name', 'like', 'Mario%')->get();
+        foreach ($games as $game) {
+            if($game->characters()->count() >= 3){
+                echo $game->name . '<br>';
+            }
+        }
+    }
+
+    public function marioPEGI3() {
+        $games = Game::where('name', 'like', 'Mario%')->get();
+        foreach ($games as $game) {
+            $rates = $game->ratings;
+            foreach ($rates as $rate) {
+                if(strpos($rate->name, '3+')) {
+                    echo $game->name . '<br>';
+                }
+            }
+        }
+    }
+    
+    public function marioInc3() {
+        $games = Game::where('name', 'like', 'Mario%')->get();
+        foreach ($games as $game) {
+            $publishers = $game->publishers;
+            foreach ($publishers as $publisher) {
+                if(strpos($publisher->name, 'Inc.')) {
+                    $rates = $game->ratings;
+                    foreach ($rates as $rate) {
+                        if(strpos($rate->name, '3+')) {
+                            echo $game->name . '<br>';
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function CEROMario() {
+        $games = Game::where('name', 'like', 'Mario%')->get();
+        foreach ($games as $game) {
+            $publishers = $game->publishers;
+            foreach ($publishers as $publisher) {
+                if(strpos($publisher->name, 'Inc.')) {
+                    $rates = $game->ratings;
+                    foreach ($rates as $rate) {
+                        if(strpos($rate->name, '3+') && strpos($rate->name, 'CERO')) {
+                            echo $game->name . '<br>';
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function newType() {
+        $genre = new Genre();
+        $genre->name = 'genre1';
+        $genre->deck = 'deck du genre1';
+        $genre->description = 'desc';
+        $genre->save();
     }
 
 }
